@@ -9,9 +9,9 @@ type FeatureItem = {
   description: ReactNode;
 };
 
-// Placeholder art (Docusaurus's own undraw SVGs) — swap for real Knolocal
-// illustrations once the content pass (knolocal#287) replaces these three
-// placeholder blurbs with real article links.
+// Placeholder art (Docusaurus's own undraw SVGs) — swap for real The
+// Roadside Emporium illustrations once the content pass (knolocal#287)
+// replaces these three placeholder blurbs with real article links.
 const FeatureList: FeatureItem[] = [
   {
     title: 'Find Vendors & Markets',
@@ -28,8 +28,8 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Add a brand-new stand, or claim an existing listing that's already on
-        Knolocal but not yet claimed.
+        Add a brand-new stand, or claim an existing listing that's already
+        on The Roadside Emporium but not yet claimed.
       </>
     ),
   },

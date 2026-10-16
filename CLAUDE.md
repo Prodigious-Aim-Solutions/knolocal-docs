@@ -1,11 +1,36 @@
 # knolocal-docs — CLAUDE.md
 
-The Knolocal Help Center: end-user/vendor how-to docs plus the legal pages
-(Terms of Service, Privacy Policy, Vendor Listing Agreement). A separate
-repo from the main app ([`knolocal`](https://github.com/Prodigious-Aim-Solutions/knolocal))
+The Roadside Emporium Help Center: end-user/vendor how-to docs plus the
+legal pages (Terms of Service, Privacy Policy, Vendor Listing Agreement). A
+separate repo from the main app ([`knolocal`](https://github.com/Prodigious-Aim-Solutions/knolocal))
 so its release cadence doesn't ride along with app releases. Scaffolded as
 a spike tracked in `knolocal#287` — read that issue for the full rationale
 and plan before making structural changes here.
+
+---
+
+## Naming — read this before writing any page content
+
+`knolocal` and `knolocal-docs` are **repo/codebase names only** — internal
+project identifiers, never shown to a real user. The product itself is
+branded **The Roadside Emporium**. Confirmed directly in the main app's own
+code: `TopBar.tsx`'s logo text reads "The Roadside Emporium", `DisputeModal.tsx`
+refers to "The Roadside Emporium team", and the app's support address is
+`contact@theroadsideemporium.com` — "Knolocal" never appears as the brand
+anywhere a user sees it in the app itself.
+
+**Rule:** every page title, nav/footer label, heading, and sentence of body
+copy in this site says "The Roadside Emporium," never "Knolocal." Keep
+"knolocal"/"knolocal-docs" only where they're literal identifiers that
+aren't prose — the repo name, the npm package name, a cross-repo issue
+reference like `knolocal#287`, a URL path segment. When in doubt about
+whether a given mention is prose or an identifier, prose almost always
+wants the real brand name.
+
+This mistake already shipped once, in this repo's own initial scaffold
+(title, tagline, nav, footer, and the intro page all said "Knolocal") —
+caught and fixed after the fact, not before. Don't repeat it when adding
+new pages.
 
 ---
 
@@ -22,16 +47,16 @@ and plan before making structural changes here.
 
 Two targets, deliberately different from each other (see `knolocal#287` for why):
 
-- **Staging/review** — GitHub Pages, via Docusaurus's own built-in support (`deploymentBranch: 'gh-pages'` in `docusaurus.config.ts`, the `npm run deploy` script). Zero AWS infra. **This repo must stay public** — GitHub Pages on a private repo needs a paid GitHub plan, and this project intentionally doesn't pay for that just to keep docs private.
-- **Production** — an S3 bucket, deployed the same way `knolocal` itself is: a plain AWS SDK v3 script (not a Vite/webpack plugin) that walks the build output and `PutObjectCommand`s every file, with `index.html` set `no-cache` and every hashed asset set far-future-cacheable. Port `knolocal/scripts/deploy.mjs` + its `.github/workflows/deploy.yml` shape here once the bucket/credentials exist — don't invent a different deploy mechanism for consistency's sake with the sibling repo.
+- **Staging/review** — GitHub Pages, live at https://prodigious-aim-solutions.github.io/knolocal-docs/. `.github/workflows/deploy-pages.yml` builds and publishes to the `gh-pages` branch on every push to `main` (`peaceiris/actions-gh-pages`, matching the `deploymentBranch: 'gh-pages'` already set in `docusaurus.config.ts`). Zero AWS infra. **This repo must stay public** — GitHub Pages on a private repo needs a paid GitHub plan, and this project intentionally doesn't pay for that just to keep docs private.
+- **Production** — an S3 bucket, deployed the same way `knolocal` itself is: a plain AWS SDK v3 script (not a Vite/webpack plugin) that walks the build output and `PutObjectCommand`s every file, with `index.html` set `no-cache` and every hashed asset set far-future-cacheable. Port `knolocal/scripts/deploy.mjs` + its `.github/workflows/deploy.yml` shape here once the bucket/credentials exist (knolocal-docs#2) — don't invent a different deploy mechanism for consistency's sake with the sibling repo.
 
-Both are tracked as not-yet-wired-up in `knolocal#287` and this repo's own issues — check there before assuming either pipeline exists.
+Production is still not wired up — check `knolocal-docs#2` and `#3` (domain/path decision) before assuming it exists.
 
 ---
 
 ## Content status
 
-Everything under `docs/` beyond `intro.mdx` is still to be written. The real article content was drafted in a Claude Doc ("Knolocal Help Center") during the planning conversation that produced `knolocal#287` — ask whoever ran that spike for the link rather than redrafting from scratch. Each article (and the legal pages, and the media/screenshot pass) is its own issue in this repo once filed; `intro.mdx`'s own "Under construction" note points here.
+Everything under `docs/` beyond `intro.mdx` is still to be written. The real article content was drafted during the planning conversation that produced `knolocal#287`, and is already embedded verbatim in this repo's own issues #4–#9 — pull it from there (it's already been corrected to say "The Roadside Emporium," not "Knolocal") rather than redrafting from scratch. Each article (and the legal pages, and the media/screenshot pass) is its own issue in this repo; `intro.mdx`'s own "Under construction" note points here.
 
 Known content debt carried over from that draft, worth preserving when porting it in:
 - 19 inline 📷 **Screenshot** / 🎥 **Video** placeholders across the six how-to articles, each noting exactly what to capture and whether a still or a short clip is the better fit (motion/interaction → video; a static screen/state → screenshot).

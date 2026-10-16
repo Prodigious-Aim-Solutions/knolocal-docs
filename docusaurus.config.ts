@@ -5,8 +5,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Knolocal Help Center',
-  tagline: 'How to use Knolocal — finding vendors and markets, listing your business, and managing it once it’s yours.',
+  title: 'The Roadside Emporium Help Center',
+  tagline: 'How to use The Roadside Emporium — finding vendors and markets, listing your business, and managing it once it’s yours.',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -15,7 +15,8 @@ const config: Config = {
   },
 
   // GitHub Pages staging URL (knolocal#287) — production may move to a
-  // knolocal.com subdomain/path once that's decided; update url/baseUrl then.
+  // theroadsideemporium.com subdomain/path once that's decided (see
+  // knolocal-docs#3); update url/baseUrl then.
   url: 'https://prodigious-aim-solutions.github.io',
   baseUrl: '/knolocal-docs/',
 
@@ -59,9 +60,9 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Knolocal Help Center',
+      title: 'The Roadside Emporium Help Center',
       logo: {
-        alt: 'Knolocal Logo',
+        alt: 'The Roadside Emporium Logo',
         src: 'img/logo.svg',
       },
       items: [
@@ -91,11 +92,11 @@ const config: Config = {
           ],
         },
         {
-          title: 'Knolocal',
+          title: 'The Roadside Emporium',
           items: [
             {
-              label: 'knolocal.com',
-              href: 'https://knolocal.com',
+              label: 'theroadsideemporium.com',
+              href: 'https://theroadsideemporium.com',
             },
             {
               label: 'GitHub',
@@ -104,7 +105,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Knolocal. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} The Roadside Emporium. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
