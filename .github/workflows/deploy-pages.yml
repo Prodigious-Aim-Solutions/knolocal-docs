@@ -1,0 +1,37 @@
+name: Deploy to GitHub Pages
+
+# Staging/review deploy (knolocal-docs#1) — every push to main publishes to
+# https://prodigious-aim-solutions.github.io/knolocal-docs/. Production is a
+# separate S3 deploy on v* tags (knolocal-docs#2), not this workflow.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
