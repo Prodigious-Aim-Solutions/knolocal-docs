@@ -1,0 +1,43 @@
+---
+sidebar_position: 11
+sidebar_label: Privacy Policy
+---
+
+# Privacy Policy
+
+:::danger Draft placeholder — not the real Privacy Policy
+This page is structural plumbing only. Nothing below has been written or
+reviewed by The Roadside Emporium's business/legal side, and none of it is
+binding or in effect. Real text is tracked in
+[knolocal#283](https://github.com/Prodigious-Aim-Solutions/knolocal/issues/283)
+and this repo's [#11](https://github.com/Prodigious-Aim-Solutions/knolocal-docs/issues/11) —
+this page gets replaced once that's supplied, not added to.
+:::
+
+## Data sources a real version of this page will need to cover
+
+A starting outline for whoever drafts the actual policy — not a legal
+checklist, and not a substitute for real legal review. Pulled from what
+the app itself actually does today:
+
+- **Account data** — email and password, handled entirely by AWS Cognito
+  via Amplify; this never touches the app's own backend at all.
+- **Analytics** — page/event tracking via `react-ga4`, plus a separate
+  backend (`vendorAnalytics`) that counts, per vendor, how many times a
+  listing was viewed and how many times someone tapped Directions on it
+  (deduplicated per browser session).
+- **Vendor-submitted data about a business** (not about the end user
+  browsing the site) — website, address, phone, social links, and
+  whatever phone/email/note a claimant or disputant submits when claiming
+  or disputing a listing.
+- **Image uploads** — vendor photos and logos, stored in S3 via a
+  presigned-URL flow.
+
+## Still to decide
+
+- Retention periods for each of the above.
+- Third-party sharing, if any (analytics providers, AWS itself).
+- How a user requests their data or its deletion.
+
+This list is a starting point for the business/legal side, not a finished
+policy.

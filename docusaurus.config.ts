@@ -98,6 +98,10 @@ const config: Config = {
               label: 'Terms of Service',
               to: '/terms-of-service',
             },
+            {
+              label: 'Privacy Policy',
+              to: '/privacy-policy',
+            },
           ],
         },
         {
