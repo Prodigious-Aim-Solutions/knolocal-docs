@@ -92,6 +92,15 @@ const config: Config = {
           ],
         },
         {
+          title: 'Legal',
+          items: [
+            {
+              label: 'Terms of Service',
+              to: '/terms-of-service',
+            },
+          ],
+        },
+        {
           title: 'The Roadside Emporium',
           items: [
             {
