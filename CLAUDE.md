@@ -40,6 +40,11 @@ new pages.
 - **Content:** Markdown/MDX under `docs/`, one file per article. Sidebar is auto-generated from that folder's structure (`sidebars.ts`).
 - **No blog** — `blog: false` in `docusaurus.config.ts`. This site is the help/legal doc set only; don't re-enable it without a real reason.
 - **routeBasePath** is `/` (not Docusaurus's default `/docs/`) — this is a docs-only site, so articles live at the site root (`/intro`, not `/docs/intro`).
+- **Light-only, no dark mode** (`colorMode.disableSwitch` in `docusaurus.config.ts`) — an explicit decision (knolocal-docs#15), not an oversight: the main app has a single fixed "Weathered Wood" palette with no dark variant to match.
+
+### `future: { v4: false }` — do not re-enable without testing admonitions first
+
+This is intentionally **off**, unlike a fresh Docusaurus 3.10+ scaffold's default of `true`. With it on (which turns on `fasterByDefault` — Docusaurus's experimental Rspack/SWC build pipeline), `:::type Title ... :::` admonition directives silently render as literal text instead of styled callouts, with no build error or warning. Confirmed directly by isolated testing during knolocal-docs#15: toggling only this flag, nothing else, reproduces and fixes it. Every admonition in this repo (the three legal pages' draft notices, all 19 media placeholders across the how-to articles) depends on this staying off. If you ever want Faster's build-speed benefits, re-test every admonition on the built site first — a successful `npm run build` does **not** catch this; only looking at the actual rendered HTML (or a screenshot) does.
 
 ---
 
@@ -56,15 +61,11 @@ Production is still not wired up — check `knolocal-docs#2` and `#3` (domain/pa
 
 ## Content status
 
-Everything under `docs/` beyond `intro.mdx` is still to be written. The real article content was drafted during the planning conversation that produced `knolocal#287`, and is already embedded verbatim in this repo's own issues #4–#9 — pull it from there (it's already been corrected to say "The Roadside Emporium," not "Knolocal") rather than redrafting from scratch. Each article (and the legal pages, and the media/screenshot pass) is its own issue in this repo; `intro.mdx`'s own "Under construction" note points here.
-
-Known content debt carried over from that draft, worth preserving when porting it in:
-- 19 inline 📷 **Screenshot** / 🎥 **Video** placeholders across the six how-to articles, each noting exactly what to capture and whether a still or a short clip is the better fit (motion/interaction → video; a static screen/state → screenshot).
-- A consolidated shot list of all 19, for whoever ends up doing the capture pass in one sitting rather than hunting through six pages.
+All six how-to articles exist and are cross-linked to each other and from the `intro.mdx` index: Signing Up & Signing In, Finding Vendors & Markets, Listing & Claiming Your Business, Managing Your Listing, Resolving a Claim Dispute. They still carry 19 inline 📷 **Screenshot** / 🎥 **Video** placeholders (as Docusaurus `:::info` admonitions) — each notes exactly what to capture and why that medium; the shoot itself is `knolocal-docs#14`.
 
 ## Legal pages
 
-Terms of Service / Privacy Policy / Vendor Listing Agreement are tracked in the main `knolocal` repo as `knolocal#282`/`#283`/`#285` — their actual legal text is explicitly **out of scope for an engineer to draft**; it needs real business/legal input. This repo's job is just the page/route plumbing once that text exists. `knolocal#284` (CASL/email consent) is a process ticket, not necessarily a page here — whether it needs one is still an open question (see `knolocal#287`).
+Terms of Service (`terms-of-service.mdx`), Privacy Policy (`privacy-policy.mdx`), and Vendor Listing Agreement (`vendor-listing-agreement.mdx`) all exist, linked from the footer's "Legal" column and cross-linked to each other — each is a `:::danger` draft-placeholder notice plus a structural outline, **not real legal text**. Getting the actual text is tracked as its own ticket per page (`knolocal-docs#16`/`#17`/`#18`, not `#10`/`#11`/`#12` — those were the now-closed plumbing tickets) — explicitly a business/legal task, not an engineering one. `knolocal#284` (CASL/email consent) is a process ticket, not necessarily a page here — whether it needs one is `knolocal-docs#13`, still open.
 
 ---
 
