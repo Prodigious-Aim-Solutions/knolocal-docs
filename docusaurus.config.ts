@@ -102,6 +102,10 @@ const config: Config = {
               label: 'Privacy Policy',
               to: '/privacy-policy',
             },
+            {
+              label: 'Vendor Listing Agreement',
+              to: '/vendor-listing-agreement',
+            },
           ],
         },
         {
