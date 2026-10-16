@@ -1,30 +1,129 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * "Weathered Wood" — matching knolocal/src/theme.ts (knolocal-docs#15).
+ * Dark bark-brown chrome (navbar/footer), gold accents, warm
+ * parchment/cream content backgrounds; Special Elite for headings,
+ * Inter for body — same Google Fonts URL knolocal/src/index.css uses.
+ *
+ * Light-only by design (see docusaurus.config.ts's colorMode) — the main
+ * app has no dark variant to match, so there's no [data-theme='dark']
+ * block here; don't add one without an actual dark-palette design pass.
  */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Inter:wght@400;500&display=swap');
 
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  /* Raw brand palette — same names/values as knolocal/src/theme.ts's
+     `brand.*` tokens, kept as custom properties so the mapping below is
+     easy to diff against that file later. */
+  --brand-bark: #3b2a1a;
+  --brand-bark-dark: #2a1d10;
+  --brand-gold: #f5c842;
+  --brand-gold-mid: #e0a820;
+  --brand-cream: #fffdf5;
+  --brand-parchment: #f5efe0;
+  --brand-tan: #e8d9b8;
+  --brand-sienna: #c44a1a;
+  --brand-muted: #a08060;
+  --brand-faint: #c9b48a;
+
+  /* Gold, darkened further for text use (links, active sidebar item) —
+     true brand.gold (#f5c842) is a bright fill color in the main app
+     (button backgrounds, borders on dark chrome), never body text on a
+     light background, where it wouldn't pass contrast. This shade is new
+     (not one of theme.ts's own tokens) — a reasoned placeholder for
+     "gold-hued but legible," flagged for a real design pass, not
+     asserted as final. */
+  --brand-gold-text: #8a6511;
+
+  --ifm-color-primary: var(--brand-gold-text);
+  --ifm-color-primary-dark: #7c5a0f;
+  --ifm-color-primary-darker: #74540e;
+  --ifm-color-primary-darkest: #5f450c;
+  --ifm-color-primary-light: #a37a1e;
+  --ifm-color-primary-lighter: #ab8229;
+  --ifm-color-primary-lightest: #c29a3f;
+
+  --ifm-background-color: var(--brand-parchment);
+  --ifm-background-surface-color: var(--brand-cream);
+  --ifm-font-color-base: var(--brand-bark);
+  --ifm-heading-color: var(--brand-bark);
+  --ifm-link-color: var(--brand-gold-text);
+  --ifm-font-family-base: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --ifm-heading-font-family: 'Special Elite', cursive;
+
+  /* Borders/dividers (hr, table, TOC) — Infima's shared emphasis scale. */
+  --ifm-color-emphasis-300: var(--brand-tan);
+  --ifm-toc-border-color: var(--brand-tan);
+  --ifm-table-border-color: var(--brand-tan);
+
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+/* Dark bark-brown chrome for the navbar, matching the main app's header. */
+.navbar {
+  background-color: var(--brand-bark);
+}
+.navbar__title,
+.navbar__link {
+  color: var(--brand-cream);
+}
+.navbar__link:hover,
+.navbar__link--active {
+  color: var(--brand-gold);
+}
+
+/* Footer: darker still, for depth against the navbar. */
+.footer {
+  background-color: var(--brand-bark-dark);
+}
+.footer__title {
+  color: var(--brand-gold);
+}
+.footer__link-item {
+  color: var(--brand-faint);
+}
+.footer__link-item:hover {
+  color: var(--brand-cream);
+}
+.footer__copyright {
+  color: var(--brand-muted);
+}
+
+/* Primary buttons: gold fill with dark bark text, matching theme.ts's
+   buttonRecipe solid variant (bg: brand.gold, color: brand.bark) —
+   Infima's own default is a white label, which gold can't carry. */
+.button--primary {
+  background-color: var(--brand-gold);
+  border-color: var(--brand-gold);
+  color: var(--brand-bark);
+}
+.button--primary:hover {
+  background-color: var(--brand-gold-mid);
+  border-color: var(--brand-gold-mid);
+  color: var(--brand-bark);
+}
+
+/* Homepage hero: Infima's `.hero--primary` uses --ifm-color-primary for
+   its background by default, which here is the darkened gold-text shade
+   (chosen for link legibility, not for a large fill) — overridden
+   separately so the hero gets the true, vivid brand.gold instead. The
+   CTA button inverts to dark bark-on-cream for contrast against that
+   bright gold, mirroring how the main app pairs dark chrome with gold
+   accents, just swapped for this one bright surface. */
+.hero--primary {
+  background-color: var(--brand-gold);
+}
+.hero--primary .hero__title,
+.hero--primary .hero__subtitle {
+  color: var(--brand-bark);
+}
+.hero--primary .button--secondary {
+  background-color: var(--brand-bark);
+  border-color: var(--brand-bark);
+  color: var(--brand-cream);
+}
+.hero--primary .button--secondary:hover {
+  background-color: var(--brand-bark-dark);
+  border-color: var(--brand-bark-dark);
+  color: var(--brand-cream);
 }

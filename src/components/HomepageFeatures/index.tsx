@@ -5,17 +5,16 @@ import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   description: ReactNode;
 };
 
-// Placeholder art (Docusaurus's own undraw SVGs) — swap for real The
-// Roadside Emporium illustrations once the content pass (knolocal#287)
-// replaces these three placeholder blurbs with real article links.
+// No illustrations (knolocal-docs#15) — Docusaurus's own mascot art was
+// actively off-brand and recoloring it wouldn't have fixed that (still a
+// dinosaur, just gold). Text-only until real brand illustrations are
+// commissioned, which is a design task, not this ticket's engineering pass.
 const FeatureList: FeatureItem[] = [
   {
     title: 'Find Vendors & Markets',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
         Browse the map or search by product, filter by open status, and get
@@ -25,7 +24,6 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'List or Claim Your Business',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
         Add a brand-new stand, or claim an existing listing that's already
@@ -35,7 +33,6 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Manage Your Listing',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
         Edit your details, hours, and photos, and see your views and
@@ -45,12 +42,9 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({title, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>

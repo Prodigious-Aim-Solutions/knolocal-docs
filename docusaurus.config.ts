@@ -9,9 +9,19 @@ const config: Config = {
   tagline: 'How to use The Roadside Emporium — finding vendors and markets, listing your business, and managing it once it’s yours.',
   favicon: 'img/favicon.ico',
 
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
+  // `v4: true` (the scaffold's original default) turns on `fasterByDefault`
+  // — Docusaurus's experimental Rspack/SWC build pipeline — which silently
+  // broke `:::type Title ::: ` admonition directives: they rendered as
+  // literal text instead of styled callouts, with no build warning or
+  // error. Confirmed directly (knolocal-docs#15): disabling v4 alone fixes
+  // it, with nothing else about the config changed. Every admonition in
+  // this repo (the three legal pages' draft notices, the 19 media
+  // placeholders across the how-to articles) was affected until this was
+  // caught by a visual check. Leave this false until Faster's MDX handling
+  // is verified fixed upstream — don't re-enable without re-testing
+  // admonitions specifically, not just confirming the build succeeds.
   future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    v4: false,
   },
 
   // GitHub Pages staging URL (knolocal#287) — production may move to a
@@ -56,15 +66,20 @@ const config: Config = {
   ],
 
   themeConfig: {
+    // knolocal#15 decision: light-only, matching the main app's own fixed
+    // "Weathered Wood" palette, which has no dark variant at all — a dark
+    // mode toggle here would need an independent design pass this ticket
+    // doesn't cover, so it's disabled rather than left to guess at one.
     colorMode: {
-      respectPrefersColorScheme: true,
+      defaultMode: 'light',
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
     },
     navbar: {
       title: 'The Roadside Emporium Help Center',
-      logo: {
-        alt: 'The Roadside Emporium Logo',
-        src: 'img/logo.svg',
-      },
+      // No real logo art exists yet (knolocal-docs#15) — the Docusaurus
+      // mascot placeholder was actively off-brand, so this is title-text
+      // only until real brand art is commissioned (tracked separately).
       items: [
         {
           type: 'docSidebar',
