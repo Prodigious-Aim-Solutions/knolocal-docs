@@ -1,0 +1,46 @@
+name: Deploy to S3 (production)
+
+# knolocal-docs#2 — triggers on a v* tag, builds with no DEPLOY_TARGET set
+# (docusaurus.config.ts's production shape: help.theroadsideemporium.com,
+# baseUrl '/'), and deploys to the production S3 bucket. Staging stays on
+# deploy-pages.yml (push to main, GH Pages).
+#
+# AWS_KNO_ACCESS_KEY_ID/AWS_KNO_SECRET_ACCESS_KEY are knolocal's own IAM
+# credentials, reused here (confirmed to already cover this bucket) rather
+# than a dedicated IAM user — same choice roadside-emporium-site made.
+# S3_BUCKET is a repository *variable* (Settings → Secrets and variables →
+# Actions → Variables), not a secret — the bucket name isn't sensitive,
+# same reasoning roadside-emporium-site's own deploy.yml documents.
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy to production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build (production)
+        run: npm run build
+
+      - name: Deploy to S3
+        run: npm run deploy:s3
+        env:
+          AWS_KNO_ACCESS_KEY_ID: ${{ secrets.AWS_KNO_ACCESS_KEY_ID }}
+          AWS_KNO_SECRET_ACCESS_KEY: ${{ secrets.AWS_KNO_SECRET_ACCESS_KEY }}
+          S3_BUCKET: ${{ vars.S3_BUCKET }}
