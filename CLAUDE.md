@@ -55,7 +55,9 @@ Two targets, deliberately different from each other (see `knolocal#287` for why)
 - **Staging/review** — GitHub Pages, live at https://prodigious-aim-solutions.github.io/knolocal-docs/. `.github/workflows/deploy-pages.yml` builds and publishes to the `gh-pages` branch on every push to `main` (`peaceiris/actions-gh-pages`, matching the `deploymentBranch: 'gh-pages'` already set in `docusaurus.config.ts`). Zero AWS infra. **This repo must stay public** — GitHub Pages on a private repo needs a paid GitHub plan, and this project intentionally doesn't pay for that just to keep docs private.
 - **Production** — an S3 bucket, deployed the same way `knolocal` itself is: a plain AWS SDK v3 script (not a Vite/webpack plugin) that walks the build output and `PutObjectCommand`s every file, with `index.html` set `no-cache` and every hashed asset set far-future-cacheable. Port `knolocal/scripts/deploy.mjs` + its `.github/workflows/deploy.yml` shape here once the bucket/credentials exist (knolocal-docs#2) — don't invent a different deploy mechanism for consistency's sake with the sibling repo.
 
-Production is still not wired up — check `knolocal-docs#2` and `#3` (domain/path decision) before assuming it exists.
+**Domain decided** (knolocal-docs#3): a dedicated subdomain, `help.theroadsideemporium.com` — not a path on the main site. `docusaurus.config.ts`'s `url`/`baseUrl` branch on `DEPLOY_TARGET` the same way `roadside-emporium-site`'s `astro.config.mjs` branches its own `site`/`base`: unset (local builds, and the eventual production build) gets the production shape (`https://help.theroadsideemporium.com`, `baseUrl: '/'`); `DEPLOY_TARGET=gh-pages` (set only by `deploy-pages.yml`'s build step) gets the GH Pages subpath shape. Since it's a dedicated subdomain rather than a path, this needs its own CloudFront distribution (+ OAC + ACM cert) once #2's bucket exists — not a second behavior on `roadside-emporium-site`'s distribution, which the path alternative would have required.
+
+Production deploy itself (the bucket, `scripts/deploy.mjs`, the S3 workflow) is still not wired up — that's `knolocal-docs#2`.
 
 ---
 

@@ -24,11 +24,17 @@ const config: Config = {
     v4: false,
   },
 
-  // GitHub Pages staging URL (knolocal#287) — production may move to a
-  // theroadsideemporium.com subdomain/path once that's decided (see
-  // knolocal-docs#3); update url/baseUrl then.
-  url: 'https://prodigious-aim-solutions.github.io',
-  baseUrl: '/knolocal-docs/',
+  // knolocal-docs#3 — decided: a dedicated subdomain
+  // (help.theroadsideemporium.com), not a path on the main site. DEPLOY_TARGET
+  // branches this the same way roadside-emporium-site's astro.config.mjs
+  // branches its own site/base — set only by this repo's own
+  // deploy-pages.yml, so an unset DEPLOY_TARGET (local builds, and the
+  // eventual production S3 deploy, knolocal-docs#2) gets the production
+  // shape by default, matching that same "staging is the opt-in" precedent.
+  url: process.env.DEPLOY_TARGET === 'gh-pages'
+    ? 'https://prodigious-aim-solutions.github.io'
+    : 'https://help.theroadsideemporium.com',
+  baseUrl: process.env.DEPLOY_TARGET === 'gh-pages' ? '/knolocal-docs/' : '/',
 
   // GitHub pages deployment config.
   organizationName: 'Prodigious-Aim-Solutions',
