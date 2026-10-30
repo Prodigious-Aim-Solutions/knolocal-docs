@@ -93,11 +93,6 @@ const config: Config = {
           position: 'left',
           label: 'Help Center',
         },
-        {
-          href: 'https://github.com/Prodigious-Aim-Solutions/knolocal-docs',
-          label: 'GitHub',
-          position: 'right',
-        },
       ],
     },
     footer: {
@@ -135,10 +130,6 @@ const config: Config = {
             {
               label: 'theroadsideemporium.com',
               href: 'https://theroadsideemporium.com',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/Prodigious-Aim-Solutions/knolocal-docs',
             },
           ],
         },
