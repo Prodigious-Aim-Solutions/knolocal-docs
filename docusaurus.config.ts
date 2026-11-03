@@ -131,6 +131,10 @@ const config: Config = {
               label: 'theroadsideemporium.com',
               href: 'https://theroadsideemporium.com',
             },
+            {
+              label: 'Open the App',
+              href: 'https://app.theroadsideemporium.com',
+            },
           ],
         },
       ],
