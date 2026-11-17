@@ -65,7 +65,9 @@ Two targets, deliberately different from each other (see `knolocal#287` for why)
 
 ## Content status
 
-All six how-to articles exist and are cross-linked to each other and from the `intro.mdx` index: Signing Up & Signing In, Finding Vendors & Markets, Listing & Claiming Your Business, Managing Your Listing, Resolving a Claim Dispute. They still carry 19 inline 📷 **Screenshot** / 🎥 **Video** placeholders (as Docusaurus `:::info` admonitions) — each notes exactly what to capture and why that medium; the shoot itself is `knolocal-docs#14`.
+All six how-to articles exist and are cross-linked to each other and from the `intro.mdx` index: Signing Up & Signing In, Finding Vendors & Markets, Listing & Claiming Your Business, Managing Your Listing, Resolving a Claim Dispute. They still carry 19 inline 📷 **Screenshot** / 🎥 **Video** placeholder notes (each spells out exactly what to capture and why that medium); the shoot itself is `knolocal-docs#14`.
+
+**All 19 are currently hidden from the rendered site** (knolocal-docs#28) — ahead of pushing real traffic to the main app before the media shoot (`#14`) happens, each `:::info Media needed ... :::` block was wrapped in an MDX comment (`{/* ... */}`) rather than deleted, so the exact capture notes are still sitting in the source, ready to un-wrap once the real screenshots/video exist. To bring one back: find its `{/* ... :::info Media needed ... ::: ... */}` wrapper and delete just the `{/*`/`*/}` lines around it. Don't re-enable `future.v4` while any of these are still wrapped (or after, for that matter) without re-reading the admonition warning above — unrelated but easy to conflate, since both are about this same admonition syntax.
 
 ## Legal pages
 
